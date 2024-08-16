@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "evm-explorer---powered-by-tenderly",
-  "title": "Evm Explorer - powered by Tenderly",
-  "description": "",
+  "name": "rayscan",
+  "title": "rayscan",
+  "description": "Searches Transaction using hash across evm blockchains",
   "icon": "extension-icon.png",
   "author": "jds-23",
   "owner": "ladddr",
@@ -14,20 +14,22 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "search-transaction",
+      "name": "index",
       "title": "Search Transaction",
       "subtitle": "Search Transaction",
       "description": "Searchs Transaction using hash across evm blockchains",
-      "mode": "no-view"
+      "mode": "view"
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.81.1",
-    "@raycast/utils": "^1.16.3"
+    "@raycast/api": "^1.81.0",
+    "@raycast/utils": "^1.16.3",
+    "jsdom": "^24.1.1"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^1.0.8",
     "@types/node": "20.8.10",
+    "@types/node-fetch": "^2.6.11",
     "@types/react": "18.3.3",
     "eslint": "^8.57.0",
     "prettier": "^3.3.3",
