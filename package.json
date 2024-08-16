@@ -3,7 +3,7 @@
   "name": "rayscan",
   "title": "rayscan",
   "description": "Searches Transaction using hash across evm blockchains",
-  "icon": "extension-icon.png",
+  "icon": "rayscan.png",
   "author": "jds-23",
   "owner": "ladddr",
   "categories": [
