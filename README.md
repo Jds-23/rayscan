@@ -14,7 +14,7 @@ Rayscan brings blockchain data to your fingertips. It is a simple, easy-to-use t
 ### Installation and Run
 
 ```bash
-$ git clone
+$ git clone https://github.com/Jds-23/rayscan.git
 $ cd rayscan
 $ npm install
 $ npm run build  # or `npm run dev` if you want to change it
