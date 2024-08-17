@@ -1,6 +1,6 @@
 import os from "node:os";
 import { Cache, environment, } from "@raycast/api";
-import { Transaction, TransactionsResponse } from "./types";
+import { NitroTransactionReceipt, Transaction, TransactionsResponse } from "./types";
 import fetch from "node-fetch";
 import { network_configs } from "./networkConfig";
 // import Parser from "rss-parser";
@@ -41,3 +41,37 @@ export function openInTenderly(transaction: Transaction) {
     const network = network_configs[transaction.network_id];
     return `https://dashboard.tenderly.co/tx/${network.slug ?? network.networkName.toLowerCase().replace(" ", "-")}/${transaction.hash}`;
 }
+export const gqlFetcher = async (url: string, query: string, variables: any) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, variables }),
+    });
+    const json = await response.json();
+    return json.data;
+};
+export const getTransactionFromExplorer = async (hash: string): Promise<{ findNitroTransactionByFilter: NitroTransactionReceipt }> => {
+    const txnQuery = `query($hash:String!) {
+      findNitroTransactionByFilter(hash: $hash){
+      dest_timestamp
+      src_timestamp
+      src_tx_hash
+      dest_tx_hash
+      status
+      dest_address
+      dest_amount
+      dest_symbol
+      fee_amount
+      fee_address
+      fee_symbol
+      recipient_address
+      deposit_id
+      src_amount
+      dest_amount
+      src_stable_address
+  }}`;
+    const txn = await gqlFetcher(VOYAGER_EXPLORER_API_HOST, txnQuery, { hash });
+    return txn;
+};
+
+const VOYAGER_EXPLORER_API_HOST = "https://api.pro-nitro-explorer-public.routernitro.com/graphql";

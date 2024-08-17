@@ -32,3 +32,21 @@ export type Transaction = {
 export type TransactionsResponse = {
     transactions: Transaction[];
 };
+
+export interface NitroTransactionReceipt {
+    dest_timestamp: number;
+    dest_tx_hash: string;
+    status: string;
+    dest_address: string;
+    dest_amount: string;
+    dest_symbol: string;
+    fee_amount: string;
+    fee_address: string;
+    fee_symbol: string;
+    recipient_address: string;
+    deposit_id: string;
+    src_amount: string;
+    src_timestamp: number;
+    src_tx_hash: string;
+    src_stable_address: string;
+}

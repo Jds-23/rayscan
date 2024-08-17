@@ -49,6 +49,38 @@ export function TransactionDetail({
     transaction: Transaction;
 }) {
     const network = network_configs[transaction.network_id];
+    // Convert to a Date object
+    const date = new Date(transaction.timestamp);
+
+    // Format to a readable date
+    const readableDate = date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName: 'short'
+    });
+    const now = new Date();
+    const timeDifference = now.getTime() - date.getTime();
+
+    // Convert to seconds, minutes, hours, days, etc.
+    const secondsAgo = Math.floor(timeDifference / 1000);
+    const minutesAgo = Math.floor(secondsAgo / 60);
+    const hoursAgo = Math.floor(minutesAgo / 60);
+    const daysAgo = Math.floor(hoursAgo / 24);
+
+    let howAgo = '';
+    if (daysAgo > 0) {
+        howAgo = `${daysAgo} day${daysAgo > 1 ? 's' : ''} ago`;
+    } else if (hoursAgo > 0) {
+        howAgo = `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else if (minutesAgo > 0) {
+        howAgo = `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    } else {
+        howAgo = `${secondsAgo} second${secondsAgo > 1 ? 's' : ''} ago`;
+    }
     const meta = [
         `# Transaction Details`,
         `## General Information`,
@@ -59,7 +91,7 @@ export function TransactionDetail({
         `- **From:** \`${transaction.from}\``,
         `- **To:** \`${transaction.to}\``,
         `- **Nonce:** \`${transaction.nonce.toLocaleString()}\``,
-        `- **Timestamp:** \`${transaction.timestamp}\``,
+        `- **Timestamp:** \`${readableDate} (${howAgo})\``,
         `## Gas Information`,
         `- **Gas Limit:** \`${transaction.gas.toLocaleString()}\``,
         `- **Gas Price:** \`${transaction.gas_price.toLocaleString()}\``,
