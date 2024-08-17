@@ -5,7 +5,6 @@
   "description": "Searches Transaction using hash across evm blockchains",
   "icon": "rayscan.png",
   "author": "jds-23",
-  "owner": "ladddr",
   "categories": [
     "Developer Tools",
     "Data",
